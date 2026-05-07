@@ -1,0 +1,14 @@
+[package]
+name = "perry-play-billing"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Google Play Billing Library bindings (Android) for Perry. Closes the Android half of PerryTS/perry#537."
+repository = "https://github.com/PerryTS/play-billing"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+perry-ffi = { git = "https://github.com/PerryTS/perry", branch = "main" }
+jni = "0.21"

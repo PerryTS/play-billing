@@ -1,0 +1,13 @@
+target/
+Cargo.lock
+node_modules/
+
+# Gradle / Android
+android/.gradle/
+android/build/
+android/local.properties
+.gradle/
+build/
+
+# OS junk
+.DS_Store

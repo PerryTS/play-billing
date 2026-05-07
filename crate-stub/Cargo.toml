@@ -1,0 +1,13 @@
+[package]
+name = "perry-play-billing"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Non-Android stub for perry-play-billing — every js_play_billing_* call resolves with a 'not available' JSON payload."
+repository = "https://github.com/PerryTS/play-billing"
+
+[lib]
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+perry-ffi = { git = "https://github.com/PerryTS/perry", branch = "main" }

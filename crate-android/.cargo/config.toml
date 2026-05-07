@@ -1,0 +1,23 @@
+# Wires the NDK clang as the linker for `cargo build --target
+# aarch64-linux-android`. We pin `android24` to match perry's
+# minSdk on Android targets.
+#
+# `ANDROID_NDK_HOME` is read at build time — it falls back to
+# `$ANDROID_HOME/ndk/<version>/`. CI sets one or the other; locally,
+# the path is the homebrew/Android Studio default.
+
+[target.aarch64-linux-android]
+linker = "aarch64-linux-android24-clang"
+ar = "llvm-ar"
+
+[target.armv7-linux-androideabi]
+linker = "armv7a-linux-androideabi24-clang"
+ar = "llvm-ar"
+
+[target.x86_64-linux-android]
+linker = "x86_64-linux-android24-clang"
+ar = "llvm-ar"
+
+[target.i686-linux-android]
+linker = "i686-linux-android24-clang"
+ar = "llvm-ar"

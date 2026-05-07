@@ -1,0 +1,17 @@
+# Build artifacts: cargo target/ and Gradle build/.
+# We DO ship the prebuilt AAR (android/play-billing-bridge.aar) so apps
+# can `implementation(files(...))` it without running Gradle. The .aar
+# is committed to the repo, so it slips through this ignore by virtue
+# of not matching any pattern below.
+target/
+**/target/
+Cargo.lock
+**/Cargo.lock
+android/.gradle/
+android/build/
+android/local.properties
+
+# OS / editor
+.DS_Store
+*.swp
+node_modules/
