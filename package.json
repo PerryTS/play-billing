@@ -1,6 +1,6 @@
 {
   "name": "@perryts/play-billing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Play Billing Library bindings (Android) for the Perry TypeScript-to-native compiler. Closes the Android half of PerryTS/perry#537.",
   "license": "MIT",
   "repository": {
