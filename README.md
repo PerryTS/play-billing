@@ -9,7 +9,7 @@ iOS / macOS sibling: [`@perryts/storekit`](https://www.npmjs.com/package/@perryt
 | Target               | Implementation                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Android (`minSdk` 24) | Native — JNI bridge over `com.android.billingclient:billing-ktx:9.x` (`BillingClient`, `queryProductDetails`, `launchBillingFlow`). |
-| iOS / macOS / Linux / Windows | Stub — every call resolves with a `"not available"` JSON payload.                                                       |
+| iOS / tvOS / watchOS / visionOS / macOS / Linux / Windows | Stub — every call resolves with a `"not available"` JSON payload.                                                       |
 
 ## Installation
 
