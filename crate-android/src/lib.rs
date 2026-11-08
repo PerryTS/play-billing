@@ -34,7 +34,7 @@
 use jni::objects::{JClass, JObject, JString, JValue};
 use jni::sys::{jint, jlong, JNI_VERSION_1_6};
 use jni::{JNIEnv, JavaVM};
-use perry_ffi::{read_string, JsPromise, JsString, Promise, StringHeader};
+use perry_ffi::{alloc_string, read_string, JsPromise, JsString, JsValue, Promise, StringHeader};
 use std::sync::OnceLock;
 
 static JVM: OnceLock<JavaVM> = OnceLock::new();
@@ -246,5 +246,9 @@ pub extern "system" fn Java_com_perryts_playbilling_PlayBillingBridge_nativeOnCo
         Ok(js) => js.into(),
         Err(_) => "{\"success\":false,\"error\":\"non-UTF8 result from PlayBillingBridge\"}".to_string(),
     };
-    promise.resolve_string(&s);
+    // Kotlin calls back on a coroutine (Dispatchers.IO) or UI thread, not
+    // perry's main thread. Building the JS string here would allocate it in
+    // this thread's arena (undefined behaviour, perry#1824): allocate it on
+    // the main thread during the resolution pump instead.
+    promise.resolve_with(move || JsValue::from_string_ptr(alloc_string(&s).as_raw()));
 }
