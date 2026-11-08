@@ -8,7 +8,7 @@ iOS / macOS sibling: [`@perryts/storekit`](https://www.npmjs.com/package/@perryt
 
 | Target               | Implementation                                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Android (`minSdk` 24) | Native — JNI bridge over `com.android.billingclient:billing-ktx:7.x` (`BillingClient`, `queryProductDetails`, `launchBillingFlow`). |
+| Android (`minSdk` 24) | Native — JNI bridge over `com.android.billingclient:billing-ktx:9.x` (`BillingClient`, `queryProductDetails`, `launchBillingFlow`). |
 | iOS / macOS / Linux / Windows | Stub — every call resolves with a `"not available"` JSON payload.                                                       |
 
 ## Installation
@@ -31,12 +31,16 @@ Add to your APK's `app/build.gradle.kts`:
 dependencies {
     // The compiled bridge class.
     implementation(files("../../node_modules/@perryts/play-billing/android/play-billing-bridge.aar"))
-    // Transitive deps (file-based AARs don't carry POM metadata; v0.2.0
-    // will publish to Maven Central and remove these two lines).
-    implementation("com.android.billingclient:billing-ktx:7.1.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    // Transitive deps (file-based AARs don't carry POM metadata; a Maven
+    // Central release will remove these two lines).
+    implementation("com.android.billingclient:billing-ktx:9.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
 ```
+
+Billing Library 9 is compiled with Kotlin 2.3 metadata, so the host APK needs the Kotlin Gradle plugin 2.2 or newer (`id("org.jetbrains.kotlin.android") version "2.2.21"`).
+
+Google Play stopped accepting Billing Library 7 for new apps and updates on 31 August 2026; this package uses 9.x, which Play accepts until 31 August 2028.
 
 Then wire the bridge to your `Activity` once at launch. If you're using `perry-ui-android`, this hooks into its existing `PerryBridge`:
 
@@ -236,7 +240,7 @@ This binding doesn't validate `purchaseToken`s itself — that's plain HTTPS aga
 
 ## Roadmap
 
-* **v0.2.0** — Maven Central publication of `com.perryts:play-billing-bridge`. Removes the `files(...)` + transitive-dep declarations from the host APK, replacing all of it with a single `implementation("com.perryts:play-billing-bridge:0.2.0")` line.
+* **Maven Central** — publication of `com.perryts:play-billing-bridge`. Removes the `files(...)` + transitive-dep declarations from the host APK, replacing all of it with a single `implementation("com.perryts:play-billing-bridge:0.2.0")` line.
 * Offer selection API for subscriptions (today the cheapest offer wins automatically).
 * Subscription upgrade/downgrade with proration mode parameters.
 

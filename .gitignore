@@ -11,3 +11,4 @@ build/
 
 # OS junk
 .DS_Store
+android/.kotlin/
