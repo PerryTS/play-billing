@@ -7,6 +7,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
@@ -25,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Static bridge between the perry-play-billing Rust JNI crate
- * (`libperry_play_billing.so`) and the Google Play Billing Library 7
+ * (`libperry_play_billing.so`) and the Google Play Billing Library 9
  * `BillingClient`.
  *
  * # Threading model
@@ -279,7 +280,8 @@ object PlayBillingBridge {
         var client = billingClient
         if (client == null) {
             client = BillingClient.newBuilder(ctx)
-                .enablePendingPurchases()
+                .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+                .enableAutoServiceReconnection()
                 .setListener(purchasesUpdatedListener)
                 .build()
             billingClient = client

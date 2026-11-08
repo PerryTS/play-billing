@@ -1,4 +1,4 @@
-// AAR module that wraps Google Play Billing Library 7 in a small set
+// AAR module that wraps Google Play Billing Library 9 in a small set
 // of static-method JNI entry points. The companion Rust crate
 // (`crate-android/`) calls these via `JNIEnv::call_static_method`.
 //
@@ -19,15 +19,15 @@
 // to add it themselves.
 
 plugins {
-    id("com.android.library") version "8.5.2"
-    id("org.jetbrains.kotlin.android") version "1.9.24"
+    id("com.android.library") version "8.8.2"
+    id("org.jetbrains.kotlin.android") version "2.2.21"
 }
 
 android {
     namespace = "com.perryts.playbilling"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
-        // Play Billing 7 requires minSdk 21+. We pick 24 to align with
+        // Play Billing 9 requires minSdk 23+. We pick 24 to align with
         // the rest of the perry Android target (perry-ui-android also
         // requires 24).
         minSdk = 24
@@ -48,6 +48,6 @@ dependencies {
     // `api` (not `implementation`) so transitively visible to the
     // host APK's compile classpath — the host doesn't need to declare
     // billing-ktx separately.
-    api("com.android.billingclient:billing-ktx:7.1.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    api("com.android.billingclient:billing-ktx:9.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
