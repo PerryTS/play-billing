@@ -1,6 +1,6 @@
 {
   "name": "@perryts/play-billing",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Google Play Billing Library bindings (Android) for the Perry TypeScript-to-native compiler. Closes the Android half of PerryTS/perry#537.",
   "license": "MIT",
   "repository": {
@@ -56,6 +56,18 @@
           "lib": "libperry_play_billing.so"
         },
         "ios": {
+          "crate": "crate-stub",
+          "lib": "libperry_play_billing.a"
+        },
+        "tvos": {
+          "crate": "crate-stub",
+          "lib": "libperry_play_billing.a"
+        },
+        "watchos": {
+          "crate": "crate-stub",
+          "lib": "libperry_play_billing.a"
+        },
+        "visionos": {
           "crate": "crate-stub",
           "lib": "libperry_play_billing.a"
         },
